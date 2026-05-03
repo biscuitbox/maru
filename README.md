@@ -34,3 +34,7 @@ openscad -o connector.stl -D "show_tile=false" -D "show_connector=true" element_
 - 모서리 라운드를 조금 키워 손베임 방지
 - `fit_clearance`를 0.2~0.3까지 시험 출력해서 결합 강도 맞추기
 - 원소군(금속/비금속/준금속)별 색상 필라멘트 규칙 정하기
+
+### 5) 정적 웹페이지 버전
+- `web/index.html`을 브라우저로 열면 CSV를 업로드해 원소별 `.scad` 파일 ZIP을 만들 수 있습니다.
+- 생성된 `.scad`를 OpenSCAD에서 열고 STL로 내보내면 됩니다.
