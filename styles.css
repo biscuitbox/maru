@@ -16,7 +16,7 @@ body {
     repeating-linear-gradient(90deg, transparent 0 38px, #fff1 39px 40px);
 }
 .container { max-width: 920px; margin: 24px auto; padding: 0 16px 40px; position: relative; }
-h1, p { color: #4a5a6b; }
+h1, p { color: #000000; }
 .card { background: var(--card); border-radius: 14px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(2px); }
 label { display: block; margin: 8px 0; }
 input, button { padding: 8px; border-radius: 8px; border: 1px solid #b9c9da; }
