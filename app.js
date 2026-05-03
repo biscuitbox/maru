@@ -55,7 +55,7 @@ set -euo pipefail
 mkdir -p stl
 for f in *.scad; do
   base="\${f%.scad}"
-  openscad -o "stl/${base}.stl" "$f"
+  openscad -o "stl/\${base}.stl" "$f"
 done
 echo "완료: stl/ 폴더 확인"
 `;
