@@ -4,8 +4,8 @@
 - `element_tiles.scad`에서 `font_name = "NanumGothic:style=Regular"`로 설정되어 있습니다.
 - 시스템에 나눔고딕이 설치되어 있어야 합니다.
 
-### 2) 엑셀로 여러 원소 한 번에 STL 생성
-`generate_tiles.py`를 사용하면 `.xlsx`의 각 행마다 STL이 생성됩니다.
+### 2) 표 파일로 여러 원소 한 번에 STL 생성
+`generate_tiles.py`를 사용하면 `.csv` 또는 `.tsv`의 각 행마다 STL이 생성됩니다.
 
 필수 컬럼(한글/영문 모두 허용):
 - `symbol` 또는 `기호`
@@ -13,10 +13,13 @@
 - `number` 또는 `원자량`
 - `atomic_number` 또는 `원자번호`
 
+샘플 파일:
+- `samples/elements_sample.csv`
+
 예시 실행:
 
 ```bash
-python3 generate_tiles.py elements.xlsx --out out
+python3 generate_tiles.py samples/elements_sample.csv --out out
 ```
 
 ### 3) 커넥터만 출력하려면
