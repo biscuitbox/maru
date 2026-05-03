@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>원소 타일 OpenSCAD 생성기</title>
+  <title>원소 타일 생성기</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-overlay"></div>
   <main class="container">
-    <h1>원소 타일 OpenSCAD 생성기</h1>
-    <p>CSV를 업로드하면 각 원소용 OpenSCAD(.scad) 파일을 ZIP으로 다운로드할 수 있습니다.</p>
+    <h1>원소 타일 생성기</h1>
+    <p>CSV를 올리면 원소별 <strong>SCAD 파일 ZIP</strong>을 만들고, OpenSCAD로 <strong>STL 일괄 변환</strong>까지 안내합니다.</p>
 
     <section class="card">
       <h2>1) CSV 업로드</h2>
@@ -19,20 +20,37 @@
     </section>
 
     <section class="card">
-      <h2>2) 기본 설정</h2>
-      <label>폰트 이름 <input id="fontName" value="NanumGothic:style=Regular" /></label>
-      <label>타일 크기 <input id="tileSize" type="number" value="80" /></label>
-      <label>기호 크기 <input id="symbolSize" type="number" value="25" /></label>
-      <label>이름 크기 <input id="nameSize" type="number" value="7" /></label>
-      <label>원자량 크기 <input id="numberSize" type="number" value="7" /></label>
+      <h2>2) 기본 설정 (단위: mm)</h2>
+      <label>폰트 선택 <button id="fontPickerBtn" type="button">폰트 고르기</button></label>
+      <input id="fontName" value="NanumGothic:style=Regular" readonly />
+      <label>타일 크기 (mm) <input id="tileSize" type="number" value="80" /></label>
+      <label>기호 크기 (mm) <input id="symbolSize" type="number" value="25" /></label>
+      <label>이름 크기 (mm) <input id="nameSize" type="number" value="7" /></label>
+      <label>원자량 크기 (mm) <input id="numberSize" type="number" value="7" /></label>
     </section>
 
     <section class="card">
       <h2>3) 생성</h2>
-      <button id="generateBtn">SCAD ZIP 만들기</button>
+      <button id="generateBtn">SCAD ZIP 만들기 (STL 변환 스크립트 포함)</button>
+      <button id="showStlGuideBtn" type="button">STL 변환 안내</button>
       <pre id="log"></pre>
     </section>
   </main>
+
+  <dialog id="fontDialog">
+    <h3>무료(상업용 가능) 한글 폰트 5종</h3>
+    <div id="fontList"></div>
+    <form method="dialog"><button>닫기</button></form>
+  </dialog>
+
+  <dialog id="stlDialog">
+    <h3>STL로 받으려면?</h3>
+    <p>브라우저 단독으로는 OpenSCAD 엔진 실행이 제한되어 STL 직접 생성은 어렵습니다.</p>
+    <p>대신 다운로드한 SCAD ZIP을 풀고 아래 명령으로 한 번에 변환하세요:</p>
+    <pre>python3 generate_tiles.py samples/elements_sample.csv --out out</pre>
+    <p class="hint">또는 각 SCAD 파일을 OpenSCAD 앱에서 열어 STL로 Export할 수 있습니다.</p>
+    <form method="dialog"><button>확인</button></form>
+  </dialog>
 
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script src="app.js"></script>
