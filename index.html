@@ -1,1 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>원소 타일 OpenSCAD 생성기</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>원소 타일 OpenSCAD 생성기 (정적 웹페이지)</h1>
+    <p>CSV를 업로드하면 각 원소용 OpenSCAD(.scad) 파일을 ZIP으로 다운로드할 수 있습니다.</p>
 
+    <section class="card">
+      <h2>1) CSV 업로드</h2>
+      <input id="csvFile" type="file" accept=".csv,text/csv" />
+      <p class="hint">헤더: 원자번호,기호,이름,원자량 (또는 atomic_number,symbol,name,number)</p>
+      <button id="downloadSample">샘플 CSV 다운로드</button>
+    </section>
+
+    <section class="card">
+      <h2>2) 기본 설정</h2>
+      <label>폰트 이름 <input id="fontName" value="NanumGothic:style=Regular" /></label>
+      <label>타일 크기 <input id="tileSize" type="number" value="80" /></label>
+      <label>기호 크기 <input id="symbolSize" type="number" value="25" /></label>
+      <label>이름 크기 <input id="nameSize" type="number" value="7" /></label>
+      <label>원자량 크기 <input id="numberSize" type="number" value="7" /></label>
+    </section>
+
+    <section class="card">
+      <h2>3) 생성</h2>
+      <button id="generateBtn">SCAD ZIP 만들기</button>
+      <pre id="log"></pre>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
