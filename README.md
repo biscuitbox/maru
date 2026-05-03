@@ -1,40 +1,70 @@
-## 원소기호 타일 생성기
+# 원소 타일 만들기 사용 설명서 (비개발자용)
 
-### 1) 한글 폰트(나눔) 적용
-- `element_tiles.scad`에서 `font_name = "NanumGothic:style=Regular"`로 설정되어 있습니다.
-- 시스템에 나눔고딕이 설치되어 있어야 합니다.
+## 1) 이 프로그램으로 무엇을 할 수 있나요?
+이 도구는 **원소 정보가 들어있는 표(CSV 파일)**를 읽어서, 3D 프린터용 모델(STL)을 만들 수 있게 도와줍니다.
 
-### 2) 표 파일로 여러 원소 한 번에 STL 생성
-`generate_tiles.py`를 사용하면 `.csv` 또는 `.tsv`의 각 행마다 STL이 생성됩니다.
+- 웹페이지에서 CSV 업로드
+- 원소별 모델 파일 생성
+- OpenSCAD로 STL 변환 후 출력
 
-필수 컬럼(한글/영문 모두 허용):
-- `symbol` 또는 `기호`
-- `name` 또는 `이름`
-- `number` 또는 `원자량`
-- `atomic_number` 또는 `원자번호`
+---
 
-샘플 파일:
-- `samples/elements_sample.csv`
+## 2) 준비물
+아래 2가지만 설치하면 됩니다.
 
-예시 실행:
+1. **OpenSCAD (무료)**
+   - 3D 모델(STL) 변환에 필요
+2. **이 프로젝트 파일**
+   - `index.html`, `app.js`, `styles.css`
+   - `element_tiles.scad`
+   - `generate_tiles.py`
+   - `samples/elements_sample.csv`
+
+---
+
+## 3) 가장 쉬운 사용 방법 (웹페이지)
+1. `index.html` 파일을 더블클릭해서 브라우저로 엽니다.
+2. **CSV 파일 선택**으로 원소표 파일을 올립니다.
+3. 폰트, 크기(mm)를 원하는 값으로 설정합니다.
+4. **SCAD ZIP 만들기 (STL 변환 스크립트 포함)** 버튼을 누릅니다.
+5. ZIP 파일이 다운로드됩니다.
+
+> ZIP 안에는 SCAD 파일들과 STL 변환용 파일(`convert_to_stl.bat`, `convert_to_stl.sh`)이 함께 들어 있습니다.
+
+---
+
+## 4) 폰트 설정
+웹페이지에서 **폰트 고르기** 버튼을 누르면 한글 지원 + 상업용 무료 폰트 5개 중 선택할 수 있습니다.
+
+- 나눔고딕
+- 나눔명조
+- Noto Sans CJK KR
+- Noto Serif CJK KR
+- KoPub 바탕체
+
+---
+
+## 5) 크기 단위
+웹페이지의 크기 단위는 모두 **mm(밀리미터)** 입니다.
+
+- 타일 크기 (mm)
+- 기호 크기 (mm)
+- 이름 크기 (mm)
+- 원자량 크기 (mm)
+
+---
+
+## 6) STL 파일로 바꾸는 방법
+### Windows
+1. 다운로드한 ZIP을 풉니다.
+2. 같은 폴더에서 `convert_to_stl.bat`를 실행합니다.
+3. `stl` 폴더에 결과 파일이 생성됩니다.
+
+### macOS/Linux
+1. ZIP을 풉니다.
+2. 터미널에서 해당 폴더로 이동합니다.
+3. 아래 명령을 실행합니다.
 
 ```bash
-python3 generate_tiles.py samples/elements_sample.csv --out out
-```
-
-### 3) 커넥터만 출력하려면
-OpenSCAD 렌더 시 아래처럼 설정:
-
-```bash
-openscad -o connector.stl -D "show_tile=false" -D "show_connector=true" element_tiles.scad
-```
-
-### 4) 중학생 수업용 추가 권장사항
-- 텍스트 높이를 `0.8~1.0`으로 올려 가독성 강화
-- 모서리 라운드를 조금 키워 손베임 방지
-- `fit_clearance`를 0.2~0.3까지 시험 출력해서 결합 강도 맞추기
-- 원소군(금속/비금속/준금속)별 색상 필라멘트 규칙 정하기
-
-### 5) 정적 웹페이지 버전
-- `web/index.html`을 브라우저로 열면 CSV를 업로드해 원소별 `.scad` 파일 ZIP을 만들 수 있습니다.
-- 생성된 `.scad`를 OpenSCAD에서 열고 STL로 내보내면 됩니다.
+chmod +x convert_to_stl.sh
+./convert_to_stl.sh
